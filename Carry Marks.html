@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Score Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter your Matric Number to View Your Carry Marks</h2>
+        <input type="text" id="matricInput" placeholder="Enter Matric Number" />
+        <button onclick="findRecord()">Search</button>
+
+        <div class="result" id="result">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const students = [
+            { matric: '209848', quiz: 1.5, scl: 4.18, drj: 2.5 },
+            { matric: '217887', quiz: 0.5, scl: 3.82, drj: 2.5 },
+            { matric: '222308', quiz: 1.5, scl: 4.09, drj: 2.5 },
+            { matric: '222621', quiz: 1, scl: 4.82, drj: 2.5 },
+            { matric: '223015', quiz: 2, scl: 5.00, drj: 2.5 },
+            { matric: '223041', quiz: 1, scl: 4.82, drj: 2.5 },
+            { matric: '223097', quiz: 2, scl: 4.64, drj: 2.5 },
+            { matric: '223143', quiz: 1.5, scl: 4.82, drj: 2.5 },
+            { matric: '223385', quiz: 0.5, scl: 3.82, drj: 2.5 },
+            { matric: '223701', quiz: 1.5, scl: 4.82, drj: 2.5 },
+            { matric: '224047', quiz: 2.5, scl: 4.82, drj: 2.5 },
+            { matric: '224081', quiz: 1, scl: 4.64, drj: 2.5 },
+            { matric: '224104', quiz: 1.5, scl: 4.82, drj: 2.5 },
+            { matric: '224111', quiz: 1.5, scl: 5.00, drj: 2.5 },
+            { matric: '224125', quiz: 1.75, scl: 4.82, drj: 2.5 },
+            { matric: '224213', quiz: 2, scl: 5.00, drj: 2.5 },
+            { matric: '224290', quiz: 2.5, scl: 5.00, drj: 2.5 },
+            { matric: '224296', quiz: 2.5, scl: 5.00, drj: 2.5 },
+            { matric: '224416', quiz: 2, scl: 4.82, drj: 2.5 },
+            { matric: '224518', quiz: 1, scl: 4.09, drj: 2.5 },
+            { matric: '224622', quiz: 2, scl: 4.64, drj: 2.5 },
+            { matric: '224788', quiz: 2, scl: 3.82, drj: 2.5 },
+            { matric: '225052', quiz: 1.5, scl: 5.00, drj: 2.5 },
+            { matric: '225270', quiz: 1.5, scl: 4.82, drj: 2.5 },
+            { matric: '225319', quiz: 1.75, scl: 4.64, drj: 2.5 },
+            { matric: '225367', quiz: 1, scl: 3.82, drj: 2.5 },
+            { matric: '225396', quiz: 1.5, scl: 4.09, drj: 2.5 },
+            { matric: '225578', quiz: 1, scl: 4.09, drj: 2.5 },
+            { matric: '225586', quiz: 1.75, scl: 3.82, drj: 2.5 },
+            { matric: '225630', quiz: 1.75, scl: 4.09, drj: 2.5 },
+            { matric: '225851', quiz: 2.5, scl: 4.82, drj: 2.5 },
+            { matric: 'SA00186', quiz: 2, scl: 5.00, drj: 2.5 },
+            { matric: 'SA00280', quiz: 1, scl: 3.82, drj: 2.5 }
+        ];
+
+        function findRecord() {
+            const matricInput = document.getElementById("matricInput").value;
+            const resultDiv = document.getElementById("result");
+
+            const student = students.find(s => s.matric === matricInput);
+
+            if (student) {
+                resultDiv.innerHTML = `
+                    <table>
+                        <tr>
+                            <th>Matric</th>
+                            <th>Quiz (2.5%)  (Dr. Wendy)</th>
+                            <th>SCL (5%)  (Dr. Wendy)</th>
+                            <th>Quiz (2.5%) (Dr. J)</th>
+                        </tr>
+                        <tr>
+                            <td>${student.matric}</td>
+                            <td>${student.quiz}</td>
+                            <td>${student.scl}</td>
+                            <td>${student.drj}</td>
+                        </tr>
+                    </table>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p>No record found for matric number: ${matricInput}</p>`;
+            }
+        }
+
+        // Disable right-click
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+            alert("Right-click has been disabled.");
+        });
+    </script>
+</body>
+</html>
